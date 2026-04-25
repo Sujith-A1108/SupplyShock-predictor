@@ -1,0 +1,42 @@
+[
+  {
+    "region": "Red Sea / Yemen",
+    "eventType": "Military Conflict",
+    "severity": "High",
+    "description": "Ongoing Houthi attacks targeting commercial shipping lanes",
+    "affectedRoutes": ["Red Sea", "Gulf of Aden", "Bab-el-Mandeb"],
+    "startDate": "2024-10-01",
+    "riskScore": 90,
+    "alternateRoute": "Cape of Good Hope"
+  },
+  {
+    "region": "Taiwan Strait",
+    "eventType": "Geopolitical Tension",
+    "severity": "Medium",
+    "description": "Increased military exercises creating shipping uncertainty",
+    "affectedRoutes": ["Taiwan Strait", "East China Sea"],
+    "startDate": "2026-03-15",
+    "riskScore": 55,
+    "alternateRoute": "Philippine Sea bypass"
+  },
+  {
+    "region": "Black Sea",
+    "eventType": "War Zone",
+    "severity": "High",
+    "description": "Russia-Ukraine conflict severely restricting Black Sea access",
+    "affectedRoutes": ["Black Sea", "Bosphorus"],
+    "startDate": "2022-02-24",
+    "riskScore": 85,
+    "alternateRoute": "Danube River route"
+  },
+  {
+    "region": "Panama Canal",
+    "eventType": "Drought / Low Water",
+    "severity": "Medium",
+    "description": "Low water levels restricting vessel size and causing queues",
+    "affectedRoutes": ["Panama Canal"],
+    "startDate": "2026-01-01",
+    "riskScore": 45,
+    "alternateRoute": "Suez Canal or Cape Horn"
+  }
+]

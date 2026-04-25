@@ -1,0 +1,74 @@
+[
+  {
+    "portId": "P001",
+    "name": "Port of Rotterdam",
+    "country": "Netherlands",
+    "congestionLevel": "High",
+    "avgWaitDays": 4,
+    "capacity": 15000,
+    "currentLoad": 14200,
+    "loadPercent": 94.7,
+    "operationalStatus": "Partial Strike",
+    "riskScore": 75
+  },
+  {
+    "portId": "P002",
+    "name": "Port of Shanghai",
+    "country": "China",
+    "congestionLevel": "Medium",
+    "avgWaitDays": 2,
+    "capacity": 47000,
+    "currentLoad": 38000,
+    "loadPercent": 80.9,
+    "operationalStatus": "Normal",
+    "riskScore": 35
+  },
+  {
+    "portId": "P003",
+    "name": "Port of Los Angeles",
+    "country": "USA",
+    "congestionLevel": "High",
+    "avgWaitDays": 5,
+    "capacity": 10000,
+    "currentLoad": 9500,
+    "loadPercent": 95.0,
+    "operationalStatus": "Congested",
+    "riskScore": 80
+  },
+  {
+    "portId": "P004",
+    "name": "Port of Singapore",
+    "country": "Singapore",
+    "congestionLevel": "Low",
+    "avgWaitDays": 1,
+    "capacity": 38000,
+    "currentLoad": 28000,
+    "loadPercent": 73.7,
+    "operationalStatus": "Normal",
+    "riskScore": 15
+  },
+  {
+    "portId": "P005",
+    "name": "Port of Hamburg",
+    "country": "Germany",
+    "congestionLevel": "Medium",
+    "avgWaitDays": 3,
+    "capacity": 9900,
+    "currentLoad": 8100,
+    "loadPercent": 81.8,
+    "operationalStatus": "Normal",
+    "riskScore": 40
+  },
+  {
+    "portId": "P006",
+    "name": "Port of Busan",
+    "country": "South Korea",
+    "congestionLevel": "Low",
+    "avgWaitDays": 1,
+    "capacity": 22000,
+    "currentLoad": 16500,
+    "loadPercent": 75.0,
+    "operationalStatus": "Normal",
+    "riskScore": 20
+  }
+]

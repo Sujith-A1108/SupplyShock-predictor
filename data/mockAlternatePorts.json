@@ -1,0 +1,389 @@
+{
+  "India": {
+    "primaryPorts": ["Nhava Sheva","Chennai","Kochi","Kolkata","Mundra","Visakhapatnam"],
+    "backupPorts": [
+      {
+        "portId": "BP_IN_01",
+        "name": "Port of Visakhapatnam",
+        "city": "Visakhapatnam",
+        "lat": 17.7, "lon": 83.3,
+        "congestionLevel": "Low",
+        "loadPercent": 58,
+        "avgWaitDays": 1,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["Bulk","Containers","Oil"],
+        "note": "Deepwater east coast port — viable alternative to Chennai and Kolkata"
+      },
+      {
+        "portId": "BP_IN_02",
+        "name": "Mundra Port",
+        "city": "Mundra",
+        "lat": 22.8, "lon": 69.7,
+        "congestionLevel": "Low",
+        "loadPercent": 62,
+        "avgWaitDays": 1,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["Containers","LNG","Coal","Bulk"],
+        "note": "India's largest private port — less congested than Nhava Sheva"
+      },
+      {
+        "portId": "BP_IN_03",
+        "name": "Ennore Port",
+        "city": "Chennai",
+        "lat": 13.2, "lon": 80.3,
+        "congestionLevel": "Low",
+        "loadPercent": 54,
+        "avgWaitDays": 1,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["Coal","LNG","Vehicles","Bulk"],
+        "note": "North Chennai — industrial cargo alternative when main Chennai port is overloaded"
+      }
+    ],
+    "backupRoutes": {
+      "Persian Gulf": {
+        "name": "Bandar Abbas → Gulf of Oman → Arabian Sea → Ennore",
+        "avoidZone": "Strait of Hormuz congestion / US-Iran tensions",
+        "waypoints": [
+          {"lat":27.2, "lon":56.3,  "name":"Bandar Abbas"},
+          {"lat":24.5, "lon":58.2,  "name":"Gulf of Oman"},
+          {"lat":22.0, "lon":60.5,  "name":"Arabian Sea Entry"},
+          {"lat":18.0, "lon":64.0,  "name":"Open Arabian Sea"},
+          {"lat":14.0, "lon":70.0,  "name":"Mid Arabian Sea"},
+          {"lat":11.0, "lon":75.5,  "name":"Kerala Coast"},
+          {"lat":8.5,  "lon":77.5,  "name":"Tip of India"},
+          {"lat":9.5,  "lon":79.5,  "name":"Palk Strait"},
+          {"lat":11.5, "lon":80.1,  "name":"Coromandel Coast"},
+          {"lat":13.2, "lon":80.3,  "name":"Ennore Port"}
+        ],
+        "extraDays": 2,
+        "reason": "Avoids Hormuz — full Arabian Sea routing hugging Indian west then east coast"
+      },
+      "Malacca Strait": {
+        "name": "Singapore → Lombok Strait → Indian Ocean → Bay of Bengal → Visakhapatnam",
+        "avoidZone": "Malacca Strait congestion / piracy alerts",
+        "waypoints": [
+          {"lat":1.3,   "lon":103.8, "name":"Singapore"},
+          {"lat":-1.5,  "lon":107.0, "name":"Java Sea"},
+          {"lat":-5.5,  "lon":111.5, "name":"Java Sea East"},
+          {"lat":-8.5,  "lon":115.7, "name":"Lombok Strait"},
+          {"lat":-10.0, "lon":112.0, "name":"Indian Ocean Entry"},
+          {"lat":-5.0,  "lon":100.0, "name":"Indian Ocean"},
+          {"lat":3.0,   "lon":89.0,  "name":"Open Indian Ocean"},
+          {"lat":8.0,   "lon":86.0,  "name":"Bay of Bengal South"},
+          {"lat":13.0,  "lon":84.5,  "name":"Bay of Bengal"},
+          {"lat":17.7,  "lon":83.3,  "name":"Visakhapatnam"}
+        ],
+        "extraDays": 3,
+        "reason": "Lombok Strait bypass around Malacca — avoids congestion and piracy zone entirely"
+      },
+      "Indian Ocean West": {
+        "name": "Colombo → Tip of India → Arabian Sea → Mundra",
+        "avoidZone": "Colombo port strike / Nhava Sheva congestion",
+        "waypoints": [
+          {"lat":6.9,  "lon":79.8, "name":"Colombo"},
+          {"lat":6.5,  "lon":77.5, "name":"Southwest Sri Lanka"},
+          {"lat":7.0,  "lon":76.5, "name":"Laccadive Sea"},
+          {"lat":8.5,  "lon":75.5, "name":"Laccadive Sea Open"},
+          {"lat":10.0, "lon":73.5, "name":"Lakshadweep"},
+          {"lat":13.0, "lon":71.5, "name":"Arabian Sea"},
+          {"lat":16.0, "lon":70.0, "name":"North Arabian Sea"},
+          {"lat":19.5, "lon":69.8, "name":"Saurashtra Approach"},
+          {"lat":22.8, "lon":69.7, "name":"Mundra Port"}
+        ],
+        "extraDays": 1,
+        "reason": "Rounds southern India tip via Laccadive Sea — avoids Mumbai congestion, diverts to Mundra"
+      }
+    }
+  },
+
+  "Iran": {
+    "primaryPorts": ["Bandar Abbas","Imam Khomeini Port","Chabahar"],
+    "backupPorts": [
+      {
+        "portId": "BP_IR_01",
+        "name": "Chabahar Port",
+        "city": "Chabahar",
+        "lat": 25.3, "lon": 60.6,
+        "congestionLevel": "Low",
+        "loadPercent": 45,
+        "avgWaitDays": 1,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["Containers","Bulk","General Cargo"],
+        "note": "Outside Hormuz — directly accessible without entering Persian Gulf"
+      },
+      {
+        "portId": "BP_IR_02",
+        "name": "Bandar Imam Khomeini Alt Berth",
+        "city": "Bandar Imam",
+        "lat": 30.4, "lon": 49.1,
+        "congestionLevel": "Low",
+        "loadPercent": 50,
+        "avgWaitDays": 2,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["General Cargo","Food","Industrial"],
+        "note": "Northern Persian Gulf — deep water berths, less congested than Bandar Abbas"
+      }
+    ],
+    "backupRoutes": {
+      "Persian Gulf": {
+        "name": "Jebel Ali → Gulf of Oman → Chabahar (Hormuz bypass)",
+        "avoidZone": "Strait of Hormuz IRGC inspections / US sanctions checkpoints",
+        "waypoints": [
+          {"lat":25.0, "lon":55.1, "name":"Jebel Ali"},
+          {"lat":24.0, "lon":56.5, "name":"Persian Gulf Mouth"},
+          {"lat":23.8, "lon":57.5, "name":"Gulf of Oman"},
+          {"lat":23.5, "lon":59.0, "name":"Open Gulf of Oman"},
+          {"lat":24.0, "lon":60.0, "name":"Oman Sea"},
+          {"lat":24.8, "lon":60.3, "name":"Chabahar Approach"},
+          {"lat":25.3, "lon":60.6, "name":"Chabahar Port"}
+        ],
+        "extraDays": 2,
+        "reason": "Chabahar is outside Hormuz — avoids IRGC naval patrols and US Navy checkpoints entirely"
+      },
+      "Indian Ocean East": {
+        "name": "Arabian Sea → Gulf of Oman → Chabahar (sanctions bypass)",
+        "avoidZone": "US secondary sanctions on carriers / Hormuz blockade risk",
+        "waypoints": [
+          {"lat":14.8, "lon":68.5, "name":"Arabian Sea"},
+          {"lat":16.0, "lon":64.0, "name":"North Arabian Sea"},
+          {"lat":19.0, "lon":61.5, "name":"Arabian Sea NW"},
+          {"lat":22.0, "lon":60.8, "name":"Oman Sea Approach"},
+          {"lat":23.5, "lon":60.5, "name":"Gulf of Oman"},
+          {"lat":24.8, "lon":60.4, "name":"Chabahar Approach"},
+          {"lat":25.3, "lon":60.6, "name":"Chabahar Port"}
+        ],
+        "extraDays": 3,
+        "reason": "Direct to Chabahar via open Arabian Sea — no Hormuz transit, avoids carrier sanctions exposure"
+      },
+      "Arabian Sea": {
+        "name": "Mumbai → Open Arabian Sea → Chabahar Direct",
+        "avoidZone": "Imam Khomeini Port congestion",
+        "waypoints": [
+          {"lat":18.9, "lon":72.8, "name":"Mumbai"},
+          {"lat":18.0, "lon":68.0, "name":"Open Arabian Sea"},
+          {"lat":19.5, "lon":64.5, "name":"Central Arabian Sea"},
+          {"lat":22.0, "lon":62.0, "name":"NW Arabian Sea"},
+          {"lat":24.0, "lon":61.2, "name":"Gulf of Oman Entry"},
+          {"lat":24.8, "lon":60.5, "name":"Chabahar Approach"},
+          {"lat":25.3, "lon":60.6, "name":"Chabahar Port"}
+        ],
+        "extraDays": 1,
+        "reason": "Direct Chabahar route via open ocean — bypasses Persian Gulf and Hormuz entirely"
+      }
+    }
+  },
+
+  "USA": {
+    "primaryPorts": ["Los Angeles","Houston","New York","Baltimore"],
+    "backupPorts": [
+      {
+        "portId": "BP_US_01",
+        "name": "Port of Seattle / Tacoma",
+        "city": "Seattle",
+        "lat": 47.6, "lon": -122.3,
+        "congestionLevel": "Low",
+        "loadPercent": 61,
+        "avgWaitDays": 1,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["Containers","Bulk","Vehicles"],
+        "note": "Pacific Northwest alternative — 60% less congested than LA/LB, strong rail connections inland"
+      },
+      {
+        "portId": "BP_US_02",
+        "name": "Port of Savannah",
+        "city": "Savannah",
+        "lat": 32.0, "lon": -81.1,
+        "congestionLevel": "Low",
+        "loadPercent": 72,
+        "avgWaitDays": 2,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["Containers","Ro-Ro","General Cargo"],
+        "note": "Fastest growing US port — deep channel, far less congestion than NY/NJ"
+      },
+      {
+        "portId": "BP_US_03",
+        "name": "Port of New Orleans",
+        "city": "New Orleans",
+        "lat": 29.9, "lon": -90.1,
+        "congestionLevel": "Low",
+        "loadPercent": 65,
+        "avgWaitDays": 1,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["Bulk","Containers","LNG","Agricultural"],
+        "note": "Gulf Coast alternative to Houston — less congested, good for agricultural/bulk cargo"
+      }
+    ],
+    "backupRoutes": {
+      "Trans-Pacific": {
+        "name": "Shanghai → North Pacific Arc → Seattle/Tacoma",
+        "avoidZone": "LA/LB port labor strike + 145% China tariff congestion",
+        "waypoints": [
+          {"lat":31.2, "lon":121.5, "name":"Shanghai"},
+          {"lat":34.0, "lon":132.0, "name":"East China Sea"},
+          {"lat":38.0, "lon":142.0, "name":"Pacific – Japan"},
+          {"lat":42.0, "lon":155.0, "name":"North Pacific"},
+          {"lat":46.0, "lon":170.0, "name":"North Pacific Arc"},
+          {"lat":48.0, "lon":-178.0,"name":"Aleutian Approach"},
+          {"lat":48.5, "lon":-158.0,"name":"Gulf of Alaska"},
+          {"lat":48.0, "lon":-138.0,"name":"Pacific Northwest"},
+          {"lat":47.6, "lon":-122.3,"name":"Port of Seattle/Tacoma"}
+        ],
+        "extraDays": 2,
+        "reason": "North Pacific arc to Seattle/Tacoma — 60% less congested than LA with strong inland rail"
+      },
+      "Pacific → Panama Canal": {
+        "name": "Incheon → Pacific → Cape Horn → Atlantic → New Orleans",
+        "avoidZone": "Panama Canal low water restrictions",
+        "waypoints": [
+          {"lat":37.5,  "lon":126.6, "name":"Incheon"},
+          {"lat":34.0,  "lon":140.0, "name":"Pacific – Japan Coast"},
+          {"lat":25.0,  "lon":150.0, "name":"Pacific Ocean"},
+          {"lat":5.0,   "lon":155.0, "name":"Pacific – Equatorial"},
+          {"lat":-15.0, "lon":150.0, "name":"South Pacific"},
+          {"lat":-35.0, "lon":125.0, "name":"South Pacific Open"},
+          {"lat":-50.0, "lon":-75.0, "name":"South Pacific – Chile"},
+          {"lat":-55.9, "lon":-67.3, "name":"Cape Horn"},
+          {"lat":-50.0, "lon":-50.0, "name":"South Atlantic"},
+          {"lat":-30.0, "lon":-40.0, "name":"South Atlantic Open"},
+          {"lat":-10.0, "lon":-35.0, "name":"Equatorial Atlantic"},
+          {"lat":12.0,  "lon":-60.0, "name":"Caribbean Sea"},
+          {"lat":21.0,  "lon":-84.0, "name":"Yucatan Channel"},
+          {"lat":25.0,  "lon":-88.0, "name":"Gulf of Mexico"},
+          {"lat":29.0,  "lon":-89.5, "name":"Mississippi Delta Approach"},
+          {"lat":29.9,  "lon":-90.1, "name":"New Orleans"}
+        ],
+        "extraDays": 8,
+        "reason": "Cape Horn route bypasses Panama Canal drought — fully water-only via South Pacific and Atlantic"
+      },
+      "North Atlantic": {
+        "name": "Rotterdam → Atlantic → Bermuda → Port of Savannah",
+        "avoidZone": "Houston port congestion",
+        "waypoints": [
+          {"lat":51.9, "lon":4.5,   "name":"Rotterdam"},
+          {"lat":50.0, "lon":-5.5,  "name":"English Channel West"},
+          {"lat":47.0, "lon":-10.0, "name":"Bay of Biscay"},
+          {"lat":43.0, "lon":-20.0, "name":"North Atlantic"},
+          {"lat":38.0, "lon":-35.0, "name":"Mid Atlantic"},
+          {"lat":35.0, "lon":-50.0, "name":"Atlantic Open"},
+          {"lat":32.5, "lon":-65.0, "name":"Bermuda"},
+          {"lat":32.0, "lon":-79.0, "name":"South Carolina Coast"},
+          {"lat":32.0, "lon":-81.1, "name":"Port of Savannah"}
+        ],
+        "extraDays": 1,
+        "reason": "Savannah is fastest-growing US container port — I-16 corridor to Southeast US"
+      }
+    }
+  },
+
+  "Russia": {
+    "primaryPorts": ["Saint Petersburg","Novorossiysk","Vladivostok","Murmansk"],
+    "backupPorts": [
+      {
+        "portId": "BP_RU_01",
+        "name": "Port of Ust-Luga",
+        "city": "Ust-Luga",
+        "lat": 59.7, "lon": 28.4,
+        "congestionLevel": "Low",
+        "loadPercent": 60,
+        "avgWaitDays": 1,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["LNG","Coal","Oil","Bulk"],
+        "note": "Gulf of Finland — alternative to Saint Petersburg for bulk and energy cargo"
+      },
+      {
+        "portId": "BP_RU_02",
+        "name": "Port of Kaliningrad",
+        "city": "Kaliningrad",
+        "lat": 54.7, "lon": 20.5,
+        "congestionLevel": "Low",
+        "loadPercent": 55,
+        "avgWaitDays": 1,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["Containers","General Cargo","Fish"],
+        "note": "Baltic exclave port — alternative when Bosphorus/Black Sea blocked"
+      },
+      {
+        "portId": "BP_RU_03",
+        "name": "Port of Nakhodka",
+        "city": "Nakhodka",
+        "lat": 42.8, "lon": 132.9,
+        "congestionLevel": "Low",
+        "loadPercent": 58,
+        "avgWaitDays": 1,
+        "operationalStatus": "Normal",
+        "handlesCargoTypes": ["Bulk","Oil","Containers"],
+        "note": "Far East — alternative to Vladivostok for overflow Asia cargo"
+      }
+    ],
+    "backupRoutes": {
+      "Black Sea → Bosphorus": {
+        "name": "Novorossiysk → Med → Gibraltar → North Sea → Kattegat → Baltic → Ust-Luga",
+        "avoidZone": "Bosphorus Turkish restrictions + EU sanctions port inspections",
+        "waypoints": [
+          {"lat":44.7, "lon":37.8,  "name":"Novorossiysk"},
+          {"lat":43.5, "lon":33.5,  "name":"Black Sea"},
+          {"lat":41.5, "lon":29.5,  "name":"Bosphorus"},
+          {"lat":40.8, "lon":27.5,  "name":"Sea of Marmara"},
+          {"lat":40.0, "lon":25.8,  "name":"Dardanelles"},
+          {"lat":39.0, "lon":22.0,  "name":"Aegean Sea"},
+          {"lat":37.0, "lon":15.0,  "name":"Ionian Sea"},
+          {"lat":36.5, "lon":5.5,   "name":"Western Mediterranean"},
+          {"lat":36.1, "lon":-5.3,  "name":"Gibraltar Strait"},
+          {"lat":44.0, "lon":-10.0, "name":"Bay of Biscay"},
+          {"lat":50.0, "lon":-2.0,  "name":"English Channel"},
+          {"lat":52.5, "lon":3.5,   "name":"North Sea"},
+          {"lat":55.5, "lon":9.5,   "name":"Kattegat Strait"},
+          {"lat":56.5, "lon":12.5,  "name":"Oresund Strait"},
+          {"lat":57.5, "lon":19.0,  "name":"Baltic Sea"},
+          {"lat":58.5, "lon":22.5,  "name":"Gulf of Finland Entry"},
+          {"lat":59.7, "lon":28.4,  "name":"Ust-Luga"}
+        ],
+        "extraDays": 7,
+        "reason": "Full Atlantic-to-Baltic bypass — Kattegat/Oresund entry to Gulf of Finland. Avoids Bosphorus and Turkish restrictions entirely"
+      },
+      "Arabian Sea → Suez Canal": {
+        "name": "Arabian Sea → Cape of Good Hope → South Atlantic → Bay of Biscay → Kattegat → Baltic → Ust-Luga",
+        "avoidZone": "Red Sea Houthi attacks + Suez Canal surcharge for Russian vessels",
+        "waypoints": [
+          {"lat":18.5,  "lon":57.2,  "name":"Arabian Sea"},
+          {"lat":12.0,  "lon":51.0,  "name":"Gulf of Aden Bypass"},
+          {"lat":5.0,   "lon":44.0,  "name":"Indian Ocean North"},
+          {"lat":-5.0,  "lon":42.0,  "name":"Indian Ocean"},
+          {"lat":-20.0, "lon":38.5,  "name":"Indian Ocean South"},
+          {"lat":-34.4, "lon":18.5,  "name":"Cape of Good Hope"},
+          {"lat":-30.0, "lon":10.0,  "name":"South Atlantic"},
+          {"lat":-15.0, "lon":0.0,   "name":"South Atlantic Open"},
+          {"lat":0.0,   "lon":-5.0,  "name":"Gulf of Guinea"},
+          {"lat":15.0,  "lon":-18.0, "name":"West Africa Coast"},
+          {"lat":35.0,  "lon":-12.0, "name":"Azores Approach"},
+          {"lat":44.0,  "lon":-10.0, "name":"Bay of Biscay"},
+          {"lat":50.0,  "lon":-2.0,  "name":"English Channel"},
+          {"lat":52.5,  "lon":3.5,   "name":"North Sea"},
+          {"lat":55.5,  "lon":9.5,   "name":"Kattegat Strait"},
+          {"lat":56.5,  "lon":12.5,  "name":"Oresund Strait"},
+          {"lat":57.5,  "lon":19.0,  "name":"Baltic Sea"},
+          {"lat":58.5,  "lon":22.5,  "name":"Gulf of Finland Entry"},
+          {"lat":59.7,  "lon":28.4,  "name":"Ust-Luga"}
+        ],
+        "extraDays": 12,
+        "reason": "Cape of Good Hope then Baltic entry via Kattegat — zero Red Sea risk, no Egypt surcharges"
+      },
+      "East Asia Pacific": {
+        "name": "Guangzhou → East China Sea → Tsugaru Strait → Japan Sea → Nakhodka",
+        "avoidZone": "Korea Strait port access ban for Russia-bound ships",
+        "waypoints": [
+          {"lat":23.1, "lon":113.3, "name":"Guangzhou"},
+          {"lat":25.0, "lon":119.0, "name":"Taiwan Strait"},
+          {"lat":30.0, "lon":124.0, "name":"East China Sea"},
+          {"lat":35.0, "lon":130.0, "name":"East China Sea North"},
+          {"lat":38.5, "lon":136.0, "name":"Sea of Japan South"},
+          {"lat":41.5, "lon":140.5, "name":"Tsugaru Strait"},
+          {"lat":42.5, "lon":135.0, "name":"Sea of Japan"},
+          {"lat":42.8, "lon":132.9, "name":"Nakhodka"}
+        ],
+        "extraDays": 2,
+        "reason": "Tsugaru Strait (between Honshu and Hokkaido) — bypasses Korea Strait entirely"
+      }
+    }
+  }
+}

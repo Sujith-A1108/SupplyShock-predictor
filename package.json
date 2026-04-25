@@ -1,0 +1,28 @@
+{
+  "name": "supplyshock-predictor",
+  "version": "5.0.0",
+  "description": "Multi-agent supply chain risk intelligence system with Python ML + real-time tracking",
+  "main": "backend/server.js",
+  "scripts": {
+    "start":     "node backend/server.js",
+    "start:full":"bash start.sh",
+    "dev":       "nodemon backend/server.js",
+    "ml:start":  "cd python_ml && python3 ml_server.py",
+    "ml:train":  "cd python_ml && python3 -c \"from training_data import generate_training_data; from models import registry; registry.train(generate_training_data(2000)); registry.save()\"",
+    "test":      "node agents/coordinatorAgent.js"
+  },
+  "dependencies": {
+    "cors":    "^2.8.5",
+    "dotenv":  "^16.4.5",
+    "express": "^4.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["supply-chain", "risk", "ai-agents", "logistics"],
+  "author": "SupplyShock Team",
+  "license": "MIT"
+}

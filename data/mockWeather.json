@@ -1,0 +1,52 @@
+[
+  {
+    "region": "Red Sea",
+    "conditions": "Tropical Storm",
+    "windSpeed": 65,
+    "waveHeight": 4.5,
+    "visibility": "Poor",
+    "riskLevel": "High",
+    "affectedRoutes": ["Red Sea", "Gulf of Aden"],
+    "forecastDays": 5
+  },
+  {
+    "region": "Suez Canal",
+    "conditions": "Sandstorm",
+    "windSpeed": 45,
+    "waveHeight": 1.2,
+    "visibility": "Very Poor",
+    "riskLevel": "Medium",
+    "affectedRoutes": ["Suez Canal"],
+    "forecastDays": 2
+  },
+  {
+    "region": "Pacific Ocean",
+    "conditions": "Clear",
+    "windSpeed": 15,
+    "waveHeight": 1.8,
+    "visibility": "Excellent",
+    "riskLevel": "Low",
+    "affectedRoutes": ["Pacific"],
+    "forecastDays": 7
+  },
+  {
+    "region": "Malacca Strait",
+    "conditions": "Heavy Rain",
+    "windSpeed": 35,
+    "waveHeight": 2.1,
+    "visibility": "Moderate",
+    "riskLevel": "Medium",
+    "affectedRoutes": ["Malacca Strait", "Singapore"],
+    "forecastDays": 3
+  },
+  {
+    "region": "Panama Canal",
+    "conditions": "Clear",
+    "windSpeed": 12,
+    "waveHeight": 0.8,
+    "visibility": "Good",
+    "riskLevel": "Low",
+    "affectedRoutes": ["Panama Canal"],
+    "forecastDays": 7
+  }
+]

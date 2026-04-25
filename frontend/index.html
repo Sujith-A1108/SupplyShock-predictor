@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SupplyShock Predictor — Maritime Intelligence</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════════════════════════════════════════ -->
+<div id="loginPage" class="login-page">
+  <div class="login-bg-grid"></div>
+  <div class="login-left">
+    <div class="login-brand">
+      <div class="login-logo">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M8 32L24 8L40 32" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 38H44" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="26" r="5" fill="url(#lg1)"/>
+          <defs>
+            <linearGradient id="lg1" x1="4" y1="8" x2="44" y2="38" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1d4ed8"/><stop offset="1" stop-color="#0ea5e9"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div>
+        <h1 class="login-title">SupplyShock<br/><span>Predictor</span></h1>
+        <p class="login-subtitle">Maritime Import Intelligence Platform</p>
+      </div>
+    </div>
+    <div class="login-features">
+      <div class="lf-item"><span class="lf-icon">🛰</span><div><strong>Live Satellite Tracking</strong><p>Real-time ship positions on satellite maps</p></div></div>
+      <div class="lf-item"><span class="lf-icon">🗺</span><div><strong>Route Intelligence</strong><p>Full voyage routes with waypoint tracking</p></div></div>
+      <div class="lf-item"><span class="lf-icon">🌡</span><div><strong>Risk Heatmaps</strong><p>Visual risk density overlays on global routes</p></div></div>
+      <div class="lf-item"><span class="lf-icon">📰</span><div><strong>Geopolitical News</strong><p>Live delay alerts from political events</p></div></div>
+      <div class="lf-item"><span class="lf-icon">🌦</span><div><strong>Weather Overlays</strong><p>Storm zones and weather risk visualization</p></div></div>
+    </div>
+    <div class="login-creds-hint">
+      <p>Demo credentials</p>
+      <div class="creds-grid">
+        <span>🇮🇳 India</span><code>IN_OPERATOR / india@2026</code>
+        <span>🇮🇷 Iran</span><code>IR_OPERATOR / iran@2026</code>
+        <span>🇺🇸 USA</span><code>US_OPERATOR / usa@2026</code>
+        <span>🇷🇺 Russia</span><code>RU_OPERATOR / russia@2026</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="login-card">
+      <div class="login-card-header">
+        <h2>Sign In</h2>
+        <p>Access your country's import intelligence dashboard</p>
+      </div>
+      <div class="login-country-selector">
+        <p class="field-label">Select Country</p>
+        <div class="country-pills" id="countryPills">
+          <button class="country-pill" data-country="India"  onclick="selectCountry('India')">🇮🇳 India</button>
+          <button class="country-pill" data-country="Iran"   onclick="selectCountry('Iran')">🇮🇷 Iran</button>
+          <button class="country-pill" data-country="USA"    onclick="selectCountry('USA')">🇺🇸 USA</button>
+          <button class="country-pill" data-country="Russia" onclick="selectCountry('Russia')">🇷🇺 Russia</button>
+        </div>
+      </div>
+      <div class="login-form">
+        <div class="field-group">
+          <label class="field-label">Operator ID</label>
+          <input type="text" id="loginUserId" class="field-input" placeholder="e.g. IN_OPERATOR" autocomplete="username"/>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="loginPassword" class="field-input" placeholder="••••••••••" autocomplete="current-password"/>
+            <button class="pw-toggle" onclick="togglePw()" title="Show password">👁</button>
+          </div>
+        </div>
+        <div class="login-error" id="loginError" style="display:none"></div>
+        <button class="btn-login" id="loginBtn" onclick="doLogin()">
+          <span id="loginBtnText">Sign In to Dashboard</span>
+          <div class="btn-spinner" id="loginSpinner" style="display:none"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     MAIN DASHBOARD
+══════════════════════════════════════════════════════════════════════════ -->
+<div id="appPage" style="display:none">
+
+  <!-- HEADER -->
+  <header class="header" id="mainHeader">
+    <div class="header-left">
+      <div class="header-logo">
+        <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+          <path d="M8 32L24 8L40 32" stroke="url(#hl1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 38H44" stroke="url(#hl1)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="26" r="5" fill="url(#hl1)"/>
+          <defs><linearGradient id="hl1" x1="4" y1="8" x2="44" y2="38"><stop stop-color="#1d4ed8"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand">SupplyShock<span class="brand-accent">Predictor</span></h1>
+        <p class="brand-sub">Maritime Import Intelligence</p>
+      </div>
+    </div>
+    <div class="header-center">
+      <div class="country-badge" id="countryBadge">
+        <span id="countryFlag"></span>
+        <span id="countryName"></span>
+        <span class="badge-label">Import View</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="status-indicator" id="statusIndicator">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Ready</span>
+      </div>
+      <button class="btn-analyze" id="analyzeBtn" onclick="runAnalysis()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        Run Analysis
+      </button>
+      <button class="btn-logout" onclick="doLogout()" title="Logout">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- SUMMARY STRIP -->
+  <section class="summary-strip" id="summaryStrip" style="display:none">
+    <div class="summary-card" id="cardTotal">
+      <div class="card-icon">🚢</div>
+      <span class="card-num" id="totalCount">—</span>
+      <span class="card-label">Active Imports</span>
+    </div>
+    <div class="summary-card risk-high" id="cardHigh">
+      <div class="card-icon">🔴</div>
+      <span class="card-num" id="highCount">—</span>
+      <span class="card-label">High Risk</span>
+    </div>
+    <div class="summary-card risk-medium" id="cardMedium">
+      <div class="card-icon">🟡</div>
+      <span class="card-num" id="mediumCount">—</span>
+      <span class="card-label">Medium Risk</span>
+    </div>
+    <div class="summary-card risk-low" id="cardLow">
+      <div class="card-icon">🟢</div>
+      <span class="card-num" id="lowCount">—</span>
+      <span class="card-label">Low Risk</span>
+    </div>
+    <div class="summary-card risk-avg" id="cardAvg">
+      <div class="card-icon">📊</div>
+      <span class="card-num" id="avgScore">—</span>
+      <span class="card-label">Avg Risk Score</span>
+    </div>
+    <div class="summary-card risk-delay" id="cardDelay">
+      <div class="card-icon">⏱</div>
+      <span class="card-num" id="totalDelayDays">—</span>
+      <span class="card-label">Total Delay Days</span>
+    </div>
+  </section>
+
+  <!-- GEOPOLITICAL NEWS TICKER -->
+  <div class="news-ticker" id="newsTicker" style="display:none">
+    <div class="ticker-label">📰 GEOPOLITICAL ALERTS</div>
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <!-- SATELLITE MAP SECTION -->
+  <section class="section" id="mapSection" style="display:none">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 class="section-title">🛰 Live Import Tracking Map</h2>
+        <span class="section-desc">Satellite view — showing only vessels importing into <strong id="mapCountryLabel"></strong></span>
+      </div>
+      <div class="map-toolbar">
+        <div class="map-layer-btns">
+          <button class="layer-btn active" id="layerRoutes"  onclick="toggleMapLayer('routes',this)">📍 Routes</button>
+          <button class="layer-btn active" id="layerWeather" onclick="toggleMapLayer('weather',this)">🌦 Weather</button>
+          <button class="layer-btn active" id="layerHeat"    onclick="toggleMapLayer('heat',this)">🌡 Heatmap</button>
+          <button class="layer-btn active" id="layerPorts"   onclick="toggleMapLayer('ports',this)">⚓ Ports</button>
+          <button class="layer-btn active" id="layerCorridors" onclick="toggleMapLayer('corridors',this)">🚨 Risk Zones</button>
+        </div>
+        <select class="map-tile-select" id="mapTileSelect" onchange="changeMapTile(this.value)">
+          <option value="satellite">Satellite</option>
+          <option value="terrain">Terrain</option>
+          <option value="street">Street</option>
+        </select>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <div id="shipMap"></div>
+      <div class="map-sidebar" id="mapSidebar">
+        <div class="sidebar-placeholder" id="sidebarPlaceholder">
+          <svg width="40" height="40" fill="none" stroke="#94a3b8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+          <p>Click a vessel on the map to view import details</p>
+        </div>
+        <div class="sidebar-ship-card" id="sidebarCard" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GEOPOLITICAL DELAY PANEL -->
+  <section class="section" id="geoDelaySection" style="display:none">
+    <div class="section-header">
+      <h2 class="section-title">🌐 Geopolitical Delay Intelligence</h2>
+      <span class="section-desc">Active political events causing import disruptions</span>
+    </div>
+    <div class="geo-delay-grid" id="geoDelayGrid"></div>
+  </section>
+
+  <!-- ALERTS -->
+  <section class="section" id="alertsSection" style="display:none">
+    <div class="section-header">
+      <h2 class="section-title">🚨 Live Import Alerts</h2>
+      <span class="badge-count" id="alertCount">0</span>
+    </div>
+    <div class="alerts-panel" id="alertsPanel"></div>
+  </section>
+
+  <!-- RISK TABLE -->
+  <section class="section" id="riskSection" style="display:none">
+    <div class="section-header">
+      <h2 class="section-title">📦 Import Risk Table</h2>
+      <div class="filter-group">
+        <button class="filter-btn active" onclick="filterTable('All',event)">All</button>
+        <button class="filter-btn" onclick="filterTable('High',event)">🔴 High</button>
+        <button class="filter-btn" onclick="filterTable('Medium',event)">🟡 Medium</button>
+        <button class="filter-btn" onclick="filterTable('Low',event)">🟢 Low</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="risk-table" id="riskTable">
+        <thead><tr>
+          <th>Vessel</th><th>Route</th><th>Cargo</th><th>Delay</th>
+          <th>Geo Events</th><th>Weather</th><th>Score</th><th>Risk</th>
+        </tr></thead>
+        <tbody id="riskTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BACKUP ROUTES -->
+  <section class="section" id="backupSection" style="display:none">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 class="section-title">🔀 Backup Route Intelligence</h2>
+        <span class="section-desc">Alternate routes and ports activated due to high congestion or geopolitical risk</span>
+      </div>
+      <span class="badge-count danger" id="backupCount">0</span>
+    </div>
+    <div class="backup-grid" id="backupGrid"></div>
+  </section>
+
+  <!-- RECOMMENDATIONS — rendered inside map sidebar on ship click -->
+  <div id="recoSection" style="display:none"></div>
+  <div id="recoGrid" style="display:none"></div>
+
+  <!-- ANALYTICS PIE CHARTS -->
+  <section class="section" id="chartsSection" style="display:none">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 class="section-title">📊 Import Analytics</h2>
+        <span class="section-desc">Visual breakdown of risk levels, cargo types, geopolitical exposure and delay impact</span>
+      </div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Risk Distribution</h3>
+          <span class="chart-sub">Shipments by risk level</span>
+        </div>
+        <div class="chart-wrap"><canvas id="chartRisk"></canvas></div>
+        <div class="chart-legend" id="legendRisk"></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Cargo Categories</h3>
+          <span class="chart-sub">Import volume by cargo type</span>
+        </div>
+        <div class="chart-wrap"><canvas id="chartCargo"></canvas></div>
+        <div class="chart-legend" id="legendCargo"></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Geopolitical Severity</h3>
+          <span class="chart-sub">Active delay events by severity</span>
+        </div>
+        <div class="chart-wrap"><canvas id="chartGeo"></canvas></div>
+        <div class="chart-legend" id="legendGeo"></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Delay by Vessel</h3>
+          <span class="chart-sub">Total delay days per ship</span>
+        </div>
+        <div class="chart-wrap"><canvas id="chartDelay"></canvas></div>
+        <div class="chart-legend" id="legendDelay"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE IMPORT/EXPORT FEED -->
+  <section class="section" id="feedSection" style="display:none">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 class="section-title">📡 Live Import / Export Feed</h2>
+        <span class="section-desc">Real-time timestamped events for every shipment — departures, waypoints, delays, alerts</span>
+      </div>
+      <div class="feed-controls">
+        <select class="feed-filter" id="feedFilter" onchange="filterFeed(this.value)">
+          <option value="ALL">All Events</option>
+          <option value="DEPARTURE">Departures</option>
+          <option value="WAYPOINT_PASSED">Waypoints</option>
+          <option value="DELAY_REPORTED">Delays</option>
+          <option value="GEO_ALERT">Geo Alerts</option>
+        </select>
+        <span class="feed-live-badge">● LIVE</span>
+      </div>
+    </div>
+    <div class="feed-list" id="feedList"></div>
+  </section>
+
+  <!-- CONSIGNMENT DRILL-DOWN -->
+  <section class="section" id="consignSection" style="display:none">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 class="section-title">📦 Consignment Drill-Down</h2>
+        <span class="section-desc">Click any vessel to see weight, items, container numbers, carrier, ETA and exception status</span>
+      </div>
+    </div>
+    <div class="consign-selector" id="consignSelector"></div>
+    <div class="consign-detail" id="consignDetail">
+      <div class="consign-placeholder">
+        <svg width="36" height="36" fill="none" stroke="#94a3b8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <p>Select a vessel above to view full consignment details</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STOCK MARKET PRICE PREDICTION -->
+  <section class="section" id="priceSection" style="display:none">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 class="section-title">📈 Cargo Price Prediction</h2>
+        <span class="section-desc">14-day simulated price forecast for your import cargo — based on route risk, delay impact, and market trends</span>
+      </div>
+      <select class="feed-filter" id="priceShipSelect" onchange="renderPriceForShip(this.value)">
+        <option value="">Select vessel...</option>
+      </select>
+    </div>
+    <div class="price-grid" id="priceGrid"></div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="section" id="impactSection" style="display:none">
+    <div class="section-header">
+      <h2 class="section-title">💰 Business Impact Estimates</h2>
+    </div>
+    <div class="impact-grid" id="impactGrid"></div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       ML INTELLIGENCE SUITE
+       ════════════════════════════════════════════════════════════════ -->
+
+  <!-- ML Model Status Bar -->
+  <div class="ml-status-bar" id="mlStatusBar" style="display:none">
+    <div class="ml-status-inner">
+      <div class="ml-status-badge" id="mlStatusBadge">
+        <span class="ml-pulse"></span>
+        <span id="mlStatusText">ML Engine Initialising…</span>
+      </div>
+      <div class="ml-metrics-strip" id="mlMetricsStrip"></div>
+    </div>
+  </div>
+
+  <!-- ML Risk Intelligence Panel -->
+  <section class="section" id="mlSection" style="display:none">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 class="section-title">🤖 ML Risk Intelligence Suite</h2>
+        <span class="section-desc">
+          Gradient-boosted delay predictor · Random-forest shortage model ·
+          Route risk scorer · Supplier reliability engine
+        </span>
+      </div>
+    </div>
+    <div class="ml-kpi-row" id="mlKpiRow"></div>
+    <div class="ml-cards-grid" id="mlCardsGrid"></div>
+  </section>
+
+  <!-- LOADING OVERLAY -->
+  <div class="loading-overlay" id="loadingOverlay" style="display:none">
+    <div class="loading-box">
+      <div class="loading-ship">🚢</div>
+      <h3 id="loadingTitle">Initializing Pipeline</h3>
+      <p class="loading-step" id="loadingStep">Starting agents...</p>
+      <div class="loading-progress"><div class="loading-bar" id="loadingBar"></div></div>
+      <div class="pipeline-steps" id="pipelineSteps"></div>
+    </div>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" id="emptyState">
+    <div class="empty-graphic">
+      <svg width="80" height="80" fill="none" viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r="38" stroke="#e2e8f0" stroke-width="2"/>
+        <path d="M15 52L40 18L65 52" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
+        <rect x="25" y="52" width="30" height="10" rx="2" fill="#e2e8f0"/>
+        <circle cx="40" cy="42" r="4" fill="#94a3b8"/>
+      </svg>
+    </div>
+    <h2 id="emptyTitle">Ready to Analyze</h2>
+    <p id="emptyDesc">Click <strong>Run Analysis</strong> to launch the multi-agent pipeline and map all active import vessels.</p>
+    <div class="pipeline-preview">
+      <span>Ingest</span><span class="arr">→</span><span>Enrich</span><span class="arr">→</span>
+      <span>Geo Risk</span><span class="arr">→</span><span>Score</span><span class="arr">→</span>
+      <span>Insights</span>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="script.js"></script>
+<script src="ml.js"></script>
+</body>
+</html>

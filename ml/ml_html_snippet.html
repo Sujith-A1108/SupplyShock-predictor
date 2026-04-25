@@ -1,0 +1,69 @@
+<!-- ═══════════════════════════════════════════════════════════════════════
+     ML INTELLIGENCE SUITE — paste after </section> of #impactSection
+     ════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ── ML Model Status Bar ──────────────────────────────────────────────── -->
+  <div class="ml-status-bar" id="mlStatusBar" style="display:none">
+    <div class="ml-status-inner">
+      <div class="ml-status-badge" id="mlStatusBadge">
+        <span class="ml-pulse"></span>
+        <span id="mlStatusText">ML Engine Initialising…</span>
+      </div>
+      <div class="ml-metrics-strip" id="mlMetricsStrip"></div>
+    </div>
+  </div>
+
+  <!-- ── ML Risk Intelligence Panel ───────────────────────────────────────── -->
+  <section class="section" id="mlSection" style="display:none">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 class="section-title">🤖 ML Risk Intelligence Suite</h2>
+        <span class="section-desc">
+          Gradient-boosted delay predictor · Random-forest shortage model ·
+          Route risk scorer · Supplier reliability engine
+        </span>
+      </div>
+    </div>
+
+    <!-- Summary KPI row -->
+    <div class="ml-kpi-row" id="mlKpiRow"></div>
+
+    <!-- Per-shipment ML cards -->
+    <div class="ml-cards-grid" id="mlCardsGrid"></div>
+  </section>
+
+  <!-- ── Scenario Simulator ─────────────────────────────────────────────── -->
+  <section class="section" id="scenarioSection" style="display:none">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 class="section-title">⚡ What-If Scenario Simulator</h2>
+        <span class="section-desc">Apply shock events and observe predicted risk delta in real time</span>
+      </div>
+    </div>
+    <div class="scenario-wrapper">
+      <div class="scenario-controls">
+        <div class="scenario-select-row">
+          <label class="scenario-label">Select Shipment</label>
+          <select class="scenario-select" id="scenarioShipSelect"></select>
+        </div>
+        <div class="scenario-select-row">
+          <label class="scenario-label">Shock Event</label>
+          <select class="scenario-select" id="scenarioShockSelect">
+            <option value="severe_weather">🌪 Severe Weather</option>
+            <option value="port_strike">⚓ Port Strike</option>
+            <option value="geopolitical_crisis">🔴 Geopolitical Crisis</option>
+            <option value="supplier_failure">🏭 Supplier Failure</option>
+            <option value="demand_spike">📈 Demand Spike</option>
+            <option value="route_closure">🚫 Route Closure</option>
+            <option value="pandemic">🦠 Pandemic Disruption</option>
+          </select>
+        </div>
+        <button class="btn-scenario" id="btnRunScenario" onclick="runScenario()">
+          Run Simulation
+        </button>
+      </div>
+      <div class="scenario-results" id="scenarioResults">
+        <div class="scenario-placeholder">Select a shipment and shock event, then click Run Simulation</div>
+      </div>
+    </div>
+  </section>

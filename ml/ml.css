@@ -1,0 +1,141 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ML INTELLIGENCE SUITE — styles
+   Paste at end of styles.css (or import as ml.css)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── ML Status Bar ───────────────────────────────────────────────────────── */
+.ml-status-bar {
+  background: linear-gradient(90deg, #0a0f1e 0%, #0d1b2a 60%, #0a0f1e 100%);
+  border-top: 1px solid #1e3a5f;
+  border-bottom: 1px solid #1e3a5f;
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+}
+.ml-status-inner { display: flex; align-items: center; gap: 24px; width: 100%; }
+.ml-status-badge {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 11px; color: #38bdf8; letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.ml-pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34,197,94,0.6);
+  animation: mlPulse 2s infinite;
+}
+@keyframes mlPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+  50%      { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+}
+.ml-metrics-strip {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: #64748b;
+}
+.ml-metric-chip { display: flex; gap: 5px; align-items: center; }
+.ml-metric-chip .mmc-label { color: #475569; }
+.ml-metric-chip .mmc-val   { color: #94a3b8; font-weight: 600; }
+.ml-metric-chip .mmc-good  { color: #22c55e; }
+.ml-metric-chip .mmc-warn  { color: #f59e0b; }
+.ml-metric-chip .mmc-bad   { color: #ef4444; }
+
+/* ── ML KPI Row ──────────────────────────────────────────────────────────── */
+.ml-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px; margin: 0 0 20px;
+}
+.ml-kpi-card {
+  background: #0d1b2a;
+  border: 1px solid #1e3a5f;
+  border-radius: 10px;
+  padding: 16px 18px;
+  position: relative; overflow: hidden;
+}
+.ml-kpi-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.ml-kpi-card.kpi-delay::before   { background: linear-gradient(90deg, #3b82f6, #06b6d4); }
+.ml-kpi-card.kpi-shortage::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+.ml-kpi-card.kpi-route::before   { background: linear-gradient(90deg, #8b5cf6, #ec4899); }
+.ml-kpi-card.kpi-supplier::before { background: linear-gradient(90deg, #22c55e, #06b6d4); }
+.ml-kpi-card.kpi-impact::before  { background: linear-gradient(90deg, #ef4444, #f97316); }
+
+.ml-kpi-label { font-size: 10px; color: #475569; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.ml-kpi-val   { font-size: 26px; font-weight: 700; color: #e2e8f0; line-height: 1; }
+.ml-kpi-sub   { font-size: 11px; color: #64748b; margin-top: 4px; }
+
+/* ── ML Cards Grid ───────────────────────────────────────────────────────── */
+.ml-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+}
+.ml-card {
+  background: #0a1525;
+  border: 1px solid #1a2e4a;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.ml-card:hover { border-color: #2563eb; transform: translateY(-2px); }
+
+.ml-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(90deg, #0d1b2a, #0a1525);
+  border-bottom: 1px solid #1a2e4a;
+}
+.ml-card-ship { font-weight: 700; font-size: 14px; color: #e2e8f0; }
+.ml-card-route { font-size: 11px; color: #475569; }
+
+.ml-risk-badge {
+  padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.ml-risk-badge.High   { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+.ml-risk-badge.Medium { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+.ml-risk-badge.Low    { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.25); }
+
+.ml-card-body { padding: 14px 16px; }
+
+/* Gauge bar */
+.ml-gauge-row  { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.ml-gauge      { display: flex; align-items: center; gap: 10px; }
+.ml-gauge-name { font-size: 10px; color: #475569; width: 80px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+.ml-gauge-bar  { flex: 1; height: 5px; background: #1e2d40; border-radius: 3px; overflow: hidden; }
+.ml-gauge-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+.ml-gauge-fill.delay    { background: linear-gradient(90deg, #3b82f6, #06b6d4); }
+.ml-gauge-fill.shortage { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+.ml-gauge-fill.route    { background: linear-gradient(90deg, #8b5cf6, #ec4899); }
+.ml-gauge-fill.supplier { background: linear-gradient(90deg, #22c55e, #06b6d4); }
+.ml-gauge-num  { font-size: 11px; color: #94a3b8; font-family: monospace; width: 38px; text-align: right; }
+
+/* Tags row */
+.ml-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.ml-tag  {
+  padding: 2px 9px; border-radius: 12px; font-size: 10px; font-weight: 600;
+  background: #111e30; border: 1px solid #1e3a5f; color: #64748b;
+}
+.ml-tag.tag-high    { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.2); color: #ef4444; }
+.ml-tag.tag-medium  { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); color: #f59e0b; }
+.ml-tag.tag-low     { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.2); color: #22c55e; }
+
+/* Impact row inside card */
+.ml-impact-row {
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid #1a2e4a;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ml-impact-label { font-size: 10px; color: #475569; text-transform: uppercase; letter-spacing: 0.06em; }
+.ml-impact-val   { font-size: 15px; font-weight: 700; color: #f97316; }
+.ml-impact-sev   {
+  font-size: 10px; padding: 2px 8px; border-radius: 10px;
+  background: rgba(249,115,22,0.12); color: #f97316;
+  border: 1px solid rgba(249,115,22,0.25);
+}
+
+@media (max-width: 700px) {  }
+
