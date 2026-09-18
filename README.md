@@ -4,7 +4,7 @@
 
 Predicts shipment delays, shortage risks, and supply disruptions using a 6-agent AI pipeline.
 
----
+
 
 ## Architecture
 
